@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "PromptCraft — AI Prompt Optimizer",
+  "version": "1.0.0",
+  "description": "Instantly transform rough prompts into expert-level AI prompts. One click, no tab switching.",
+
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16":  "icons/icon16.png",
+      "48":  "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "PromptCraft"
+  },
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://perplexity.ai/*",
+        "https://www.perplexity.ai/*",
+        "https://grok.x.com/*",
+        "https://copilot.microsoft.com/*"
+      ],
+      "js":  ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "permissions": [
+    "storage",
+    "identity",
+    "tabs",
+    "activeTab"
+  ],
+
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://perplexity.ai/*",
+    "https://www.perplexity.ai/*",
+    "https://grok.x.com/*",
+    "https://copilot.microsoft.com/*"
+  ],
+
+  "oauth2": {
+    "client_id": "263914369175-70285hmdjpv76mu35pgfd9521nh9ucq5.apps.googleusercontent.com",
+    "scopes": ["openid", "email", "profile"]
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["auth-callback.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
